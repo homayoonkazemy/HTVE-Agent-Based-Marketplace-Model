@@ -1,0 +1,58 @@
+name: Generate replication data
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/generate-replication-data.yml'
+      - 'code/**'
+      - 'requirements.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run all HTVE experiments
+        run: python code/htve_abm_replication.py
+
+      - name: Stage reproducibility outputs
+        run: |
+          mkdir -p data figures
+          cp code/replication_results/simulation_all_runs.csv data/simulation_all_runs.csv
+          cp code/replication_results/experiment_A_market_breadth_runs.csv data/experiment_A_market_breadth_runs.csv
+          cp code/replication_results/experiment_B_unit_stock_runs.csv data/experiment_B_unit_stock_runs.csv
+          cp code/replication_results/experiment_C_genesis_concentration_runs.csv data/experiment_C_genesis_concentration_runs.csv
+          cp code/replication_results/experiment_D_capacity_recycling_runs.csv data/experiment_D_capacity_recycling_runs.csv
+          cp code/replication_results/summary_A_market_breadth.csv data/summary_A_market_breadth.csv
+          cp code/replication_results/summary_B_unit_stock.csv data/summary_B_unit_stock.csv
+          cp code/replication_results/summary_C_genesis_concentration.csv data/summary_C_genesis_concentration.csv
+          cp code/replication_results/summary_D_capacity_recycling.csv data/summary_D_capacity_recycling.csv
+          cp code/replication_results/sector_archetypes.csv data/sector_archetypes.csv
+          cp code/replication_results/*.png figures/
+
+      - name: Commit generated files
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data figures
+          if git diff --cached --quiet; then
+            echo 'Generated outputs are already up to date.'
+          else
+            git commit -m 'Generate full HTVE replication dataset and figures'
+            git push
+          fi
