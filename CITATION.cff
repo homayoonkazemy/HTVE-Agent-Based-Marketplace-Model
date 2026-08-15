@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this replication package, please cite the associated manuscript and this repository."
+title: "HTVE Agent-Based Marketplace Model: replication code and simulation data"
+type: software
+authors:
+  - family-names: Kazemy
+    given-names: Homayoon
+    orcid: "https://orcid.org/0000-0003-1929-5999"
+repository-code: "https://github.com/homayoonkazemy/HTVE-Agent-Based-Marketplace-Model"
+keywords:
+  - agent-based modeling
+  - electronic marketplaces
+  - closed-loop exchange
+  - digital economy
+  - market design
+  - complementary currency
+  - liquidity constraints
