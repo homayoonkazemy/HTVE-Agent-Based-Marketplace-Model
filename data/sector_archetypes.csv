@@ -1,0 +1,31 @@
+sector_id,sector_archetype
+1,Food retail
+2,Agriculture
+3,Household goods
+4,Apparel
+5,Transport
+6,Logistics
+7,Housing maintenance
+8,Construction
+9,Repair services
+10,Home services
+11,Healthcare
+12,Dentistry
+13,Nursing and caregiving
+14,Education
+15,Childcare
+16,IT services
+17,Digital services
+18,Legal services
+19,Accounting
+20,Professional consulting
+21,Hospitality
+22,Personal care
+23,Fitness and wellness
+24,Creative and media
+25,Manufacturing and crafts
+26,Cleaning services
+27,Administrative services
+28,Local delivery
+29,Equipment services
+30,Other local services
