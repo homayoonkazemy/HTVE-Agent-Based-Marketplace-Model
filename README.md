@@ -2,6 +2,8 @@
 
 Replication package for the 30-sector agent-based experiments used to study the **Homayoon Theory of Value Exchange (HTVE)** in a closed-loop digital marketplace.
 
+[![Generate replication data](https://github.com/homayoonkazemy/HTVE-Agent-Based-Marketplace-Model/actions/workflows/generate-replication-data.yml/badge.svg)](https://github.com/homayoonkazemy/HTVE-Agent-Based-Marketplace-Model/actions/workflows/generate-replication-data.yml)
+
 ## Associated manuscript
 
 **Can a closed-loop digital marketplace scale? Agent-based experiments with the Homayoon Theory of Value Exchange across 30 sectors**
@@ -37,15 +39,23 @@ HTVE-Agent-Based-Marketplace-Model/
 ├── CITATION.cff
 ├── requirements.txt
 ├── .gitignore
+├── .github/workflows/
+│   └── generate-replication-data.yml
 ├── code/
 │   └── htve_abm_replication.py
-└── data/
-    ├── sector_archetypes.csv
-    ├── simulation_all_runs.csv
-    ├── summary_A_market_breadth.csv
-    ├── summary_B_unit_stock.csv
-    ├── summary_C_genesis_concentration.csv
-    └── summary_D_capacity_recycling.csv
+├── data/
+│   ├── sector_archetypes.csv
+│   ├── simulation_all_runs.csv
+│   ├── experiment_A_market_breadth_runs.csv
+│   ├── experiment_B_unit_stock_runs.csv
+│   ├── experiment_C_genesis_concentration_runs.csv
+│   ├── experiment_D_capacity_recycling_runs.csv
+│   ├── summary_A_market_breadth.csv
+│   ├── summary_B_unit_stock.csv
+│   ├── summary_C_genesis_concentration.csv
+│   └── summary_D_capacity_recycling.csv
+└── figures/
+    └── generated PNG figures
 ```
 
 ## Reproduction
@@ -62,7 +72,9 @@ Then run:
 python code/htve_abm_replication.py
 ```
 
-The script creates a `replication_results/` directory next to the script and reproduces the experiment-level run files, summary tables, sector definitions, and figures.
+The script creates a `replication_results/` directory next to the script and reproduces the run-level files, summary tables, sector definitions, and figures.
+
+The repository also includes a GitHub Actions workflow that executes the complete model from a clean Python environment and commits the reproduced data and figures. This provides an independent, machine-executed reproducibility check.
 
 The code uses fixed seed ranges for the four experiment families, so results are reproducible subject to the usual numerical differences that can arise across library/platform versions.
 
@@ -70,6 +82,10 @@ The code uses fixed seed ranges for the four experiment families, so results are
 
 - `data/sector_archetypes.csv` — the 30 sector labels used by the model.
 - `data/simulation_all_runs.csv` — run-level outcomes for all 460 simulations.
+- `data/experiment_A_market_breadth_runs.csv` — all 80 market-breadth runs.
+- `data/experiment_B_unit_stock_runs.csv` — all 100 unit-stock runs.
+- `data/experiment_C_genesis_concentration_runs.csv` — all 200 concentration/recycling runs.
+- `data/experiment_D_capacity_recycling_runs.csv` — all 80 capacity/recycling runs.
 - `data/summary_A_market_breadth.csv` — 95% normal-approximation confidence intervals by sector coverage.
 - `data/summary_B_unit_stock.csv` — summaries by mean initial unit balance.
 - `data/summary_C_genesis_concentration.csv` — summaries by top-decile genesis concentration and recycling condition.
